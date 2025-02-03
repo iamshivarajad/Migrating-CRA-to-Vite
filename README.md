@@ -151,3 +151,27 @@ To access these environment variables you must change all process.env.s to impor
 
 You should be able to search and replace this.
 
+### Additional notes for large existing projects
+
+Vite recommends using CSS modules for your application. If you use Sass or CSS you might need to install the Sass preprocessor.
+
+```
+npm i --save-dev sass
+```
+If you must have react or vue environment variables available in process.env for your Vite application then you can use the plugin vite-plugin-env-compatible.
+
+The plugin will load VUE_APP_ or REACT_APP_ environment variables to process.env. You might need this if you are using a library that expects an env var to be on process.env for example.
+
+```
+npm i vite-plugin-env-compatible
+```
+and add
+```
+envCompatible()
+```
+to your vite.config.ts plugins section.
+
+### Done!
+That’s it. Now try running your app with npm run start
+
+Let me know if anything doesn’t work for you!
