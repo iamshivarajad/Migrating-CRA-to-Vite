@@ -73,11 +73,11 @@ export default defineConfig({
 ```
 
 ### 3. Update your tsconfig.json
-You must set the tsconfig.json to use esnext as a target,lib and module type. This might change in future versions of TypeScripts as more esnext functionality is added to the es standard for a given year so check the Vite site for updated config if this article is old.
+You must set the tsconfig.json to use esnext as a target, lib and module type. This might change in future versions of TypeScripts as more esnext functionality is added to the es standard for a given year so check the Vite site for updated config if this article is old.
 
 Add the vite types to the types section. This tells TypeScript about the special Vite browser functionality that it provides for us.
 
-Finally don't forget to set isolatedModules to true if you don't have that already. There is some modern Typescript functionally that is not supported by Vite yet.
+Finally don't forget to set isolatedModules to true if you don't have that already. There is some modern Typescript functionality that is not supported by Vite yet.
 
 ```
 {
@@ -104,7 +104,7 @@ Finally don't forget to set isolatedModules to true if you don't have that alrea
 ```
 
 ### 4. Install to update everything
-Run yarn or npm i to install all the new dependencies we have added to the project.
+Run yarn or **npm i** to install all the new dependencies we have added to the project.
 
 ### 5. Move your index.html file
 Move the index.html from /public out to the root of the project.
@@ -112,19 +112,19 @@ Move the index.html from /public out to the root of the project.
 Vite doesn't need the index.html to be in the public folder any more.
 
 ### 6. Update the content of index.html
-Vite handles urls in the index.html differently to create react app.
+Vite handles URLs in the index.html differently to create a react app.
 
-Remove any %PUBLIC_URL% references from the file. Just replace that string with "".
+Remove any **%PUBLIC_URL%** references from the file. Just replace that string with **""**.
 
 ```
-{/* This is the create react app url. change this to not have the variable... */}
+{/* This is the create react app URL. change this to not have the variable... */}
 <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 
-{/* ... to be like this. This is the correct url for Vite */}
+{/* ... to be like this. This is the correct URL for Vite */}
 <link rel="icon" href="/favicon.ico" />
 ```
 
-Add a script tag with the project entrypoint
+Add a script tag with the project entry point
 
 ```
 <body>
@@ -141,26 +141,29 @@ Rename your environment variables so they start with VITE_ e.g. search and repla
 ```
 # this create react app variable
 REACT_APP_MY_VAR
+
 # should be this in Vite
 VITE_MY_VAR
 ```
 
 Vite uses the ECMAScript module import.meta properties to pass environment variables to the modules.
 
-To access these environment variables you must change all process.env.s to import.meta.env..
+To access these environment variables you must change all **process.env.** s to **import.meta.env.**.
 
 You should be able to search and replace this.
 
 ### Additional notes for large existing projects
 
-Vite recommends using CSS modules for your application. If you use Sass or CSS you might need to install the Sass preprocessor.
+Vite recommends using CSS modules for your application. You should install the Sass preprocessor if you use Sass or CSS.
 
 ```
 npm i --save-dev sass
 ```
-If you must have react or vue environment variables available in process.env for your Vite application then you can use the plugin vite-plugin-env-compatible.
+If you facing issue related to **@import** you need to replace **@import** to **@use**, [ref](https://sass-lang.com/documentation/breaking-changes/import/)
 
-The plugin will load VUE_APP_ or REACT_APP_ environment variables to process.env. You might need this if you are using a library that expects an env var to be on process.env for example.
+If you must have react or vue environment variables available in process.env for your Vite application then you can use the plugin [vite-plugin-env-compatible](https://www.npmjs.com/package/vite-plugin-env-compatible).
+
+The plugin will load **VUE_APP_** or **REACT_APP_** environment variables to **process.env.** You might need this if you are using a library that expects an env var to be on process.env for example.
 
 ```
 npm i vite-plugin-env-compatible
