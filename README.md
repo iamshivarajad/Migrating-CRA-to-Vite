@@ -20,12 +20,12 @@ These are the steps we will follow to migrate.
 Let's go!
 
 ### 1. Update your package.json
-Change your package.json scripts to use Vite. Don’t worry about not having it yet, we will install it later.
+Change your ```package.json``` scripts to use Vite. Don’t worry about not having it yet, we will install it later.
 
 ```
 "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview",
 },
 ```
@@ -37,7 +37,7 @@ npm i vite @vitejs/plugin-react vite-plugin-svgr
 ```
 
 ### 2. Add a Vite config
-Add vite.config.ts to the root of your project. I just use this basic configuration to start with.
+Add ```vite.config.ts``` to the root of your project. I just use this basic configuration to start with.
 ```
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -71,13 +71,17 @@ export default defineConfig({
 	},
 });
 ```
+For TypeScript projects, create an ```src/vite-env.d.ts``` file with the [following content](https://vite.dev/guide/features.html#client-types):
+```
+/// <reference types="vite/client" />
+```
 
 ### 3. Update your tsconfig.json
-You must set the tsconfig.json to use esnext as a target, lib and module type. This might change in future versions of TypeScripts as more esnext functionality is added to the es standard for a given year so check the Vite site for updated config if this article is old.
+You must set the ```tsconfig.json``` to use esnext as a target, lib and module type. This might change in future versions of TypeScripts as more esnext functionality is added to the es standard for a given year so check the Vite site for updated config if this article is old.
 
 Add the vite types to the types section. This tells TypeScript about the special Vite browser functionality that it provides for us.
 
-Finally don't forget to set isolatedModules to true if you don't have that already. There is some modern Typescript functionality that is not supported by Vite yet.
+Finally don't forget to set **isolatedModules** to true if you don't have that already. There is some modern Typescript functionality that is not supported by Vite yet.
 
 ```
 {
@@ -107,12 +111,12 @@ Finally don't forget to set isolatedModules to true if you don't have that alrea
 Run yarn or **npm i** to install all the new dependencies we have added to the project.
 
 ### 5. Move your index.html file
-Move the index.html from /public out to the root of the project.
+Move the ```index.html``` from /public out to the root of the project.
 
 Vite doesn't need the index.html to be in the public folder any more.
 
 ### 6. Update the content of index.html
-Vite handles URLs in the index.html differently to create a react app.
+Vite handles URLs in the ```index.html``` differently to create a react app.
 
 Remove any **%PUBLIC_URL%** references from the file. Just replace that string with **""**.
 
@@ -136,7 +140,7 @@ Add a script tag with the project entry point
 ```
 
 ### 7. Update all your env vars if you use them
-Rename your environment variables so they start with VITE_ e.g. search and replace REACT_APP_toVITE_
+Rename your environment variables so they start with ```VITE_``` e.g. search and replace ```REACT_APP_``` to ```VITE_```
 
 ```
 # this create react app variable
