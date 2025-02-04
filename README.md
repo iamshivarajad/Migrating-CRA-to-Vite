@@ -9,17 +9,18 @@ Vite is almost a drop-in replacement for CRA if you already use TypeScript. You 
 
 These are the steps we will follow to migrate.
 
-1. Update your package.json
-2. Add a Vite config
-3. Update your tsconfig.json file
-4. Install all the packages
-5. Move your index.html file
-6. Update the index.html contents
-7. Update all your env vars
+1. [Update your package.json](#update-your-package-json)
+2. [Add a Vite config](#vite-config)
+3. [Update your tsconfig.json file](#tsconfig)
+4. [Install all the packages](#install-package)
+5. [Move your index.html file](#move-index-file)
+6. [Update the index.html contents](#update-index-file)
+7. [Update all your env vars](#update-env)
+8. [Additional notes for large existing projects](#additional-notes)
 
 Let's go!
 
-### 1. Update your package.json
+### 1. [Update your package.json](#update-your-package-json)
 Change your ```package.json``` scripts to use Vite. Don’t worry about not having it yet, we will install it later.
 
 ```
@@ -36,7 +37,7 @@ Add some new devDependencies for Vite.
 npm i vite @vitejs/plugin-react vite-plugin-svgr
 ```
 
-### 2. Add a Vite config
+### 2. [Add a Vite config](#vite-config)
 Add ```vite.config.ts``` to the root of your project. I just use this basic configuration to start with.
 ```
 import { defineConfig } from 'vite';
@@ -76,7 +77,7 @@ For TypeScript projects, create an ```src/vite-env.d.ts``` file with the [follow
 /// <reference types="vite/client" />
 ```
 
-### 3. Update your tsconfig.json
+### 3. [Update your tsconfig.json](#tsconfig)
 You must set the ```tsconfig.json``` to use esnext as a target, lib and module type. This might change in future versions of TypeScripts as more esnext functionality is added to the es standard for a given year so check the Vite site for updated config if this article is old.
 
 Add the vite types to the types section. This tells TypeScript about the special Vite browser functionality that it provides for us.
@@ -107,15 +108,15 @@ Finally don't forget to set **isolatedModules** to true if you don't have that a
 }
 ```
 
-### 4. Install to update everything
+### 4. [Install to update everything](#install-package)
 Run yarn or **npm i** to install all the new dependencies we have added to the project.
 
-### 5. Move your index.html file
+### 5. [Move your index.html file](#move-index-file)
 Move the ```index.html``` from /public out to the root of the project.
 
 Vite doesn't need the index.html to be in the public folder any more.
 
-### 6. Update the content of index.html
+### 6. [Update the content of index.html](#update-index-file)
 Vite handles URLs in the ```index.html``` differently to create a react app.
 
 Remove any **%PUBLIC_URL%** references from the file. Just replace that string with **""**.
@@ -139,7 +140,7 @@ Add a script tag with the project entry point
 </body>
 ```
 
-### 7. Update all your env vars if you use them
+### 7. [Update all your env vars if you use them](#update-env)
 Rename your environment variables so they start with ```VITE_``` e.g. search and replace ```REACT_APP_``` to ```VITE_```
 
 ```
@@ -156,7 +157,7 @@ To access these environment variables you must change all **process.env.** s to 
 
 You should be able to search and replace this.
 
-### Additional notes for large existing projects
+### 8. [Additional notes for large existing projects](#additional-notes)
 
 Vite recommends using CSS modules for your application. You should install the Sass preprocessor if you use Sass or CSS.
 
