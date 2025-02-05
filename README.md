@@ -9,8 +9,8 @@ Vite is almost a drop-in replacement for CRA if you already use TypeScript. You 
 
 These are the steps we will follow to migrate.
 
-1. [Update your package.json](#update-your-package-json)
-2. [Add a Vite config](#vite-config)
+1. [Update your package.json](#update-your-package.json)
+2. [Add a Vite config](#add-a-vite-config)
 3. [Update your tsconfig.json file](#tsconfig)
 4. [Install all the packages](#install-package)
 5. [Move your index.html file](#move-index-file)
@@ -20,7 +20,7 @@ These are the steps we will follow to migrate.
 
 Let's go!
 
-### 1. [Update your package.json](#update-your-package-json)
+1. ## Update your package.json
 Change your ```package.json``` scripts to use Vite. Don’t worry about not having it yet, we will install it later.
 
 ```
@@ -30,14 +30,19 @@ Change your ```package.json``` scripts to use Vite. Don’t worry about not havi
     "serve": "vite preview",
 },
 ```
-Make sure you delete react-scripts from your dependencies section.
+Make sure you delete ```react-scripts``` from your dependencies section.
 
 Add some new devDependencies for Vite.
 ```
-npm i vite @vitejs/plugin-react vite-plugin-svgr
+npm i vite @vitejs/plugin-react vite-plugin-svgr --save-dev
+```
+If you encounter a dependency-related issue, you need to update the ```@types/node`` to the latest
+
+```
+npm i @types/node@latest --save-dev
 ```
 
-### 2. [Add a Vite config](#vite-config)
+2. ## Add a Vite config
 Add ```vite.config.ts``` to the root of your project. I just use this basic configuration to start with.
 ```
 import { defineConfig } from 'vite';
@@ -109,7 +114,9 @@ Finally don't forget to set **isolatedModules** to true if you don't have that a
 ```
 
 ### 4. [Install to update everything](#install-package)
-Run yarn or **npm i** to install all the new dependencies we have added to the project.
+Delete the ```node_modules```
+
+Run **npm i** to install all the new dependencies we have added to the project.
 
 ### 5. [Move your index.html file](#move-index-file)
 Move the ```index.html``` from /public out to the root of the project.
